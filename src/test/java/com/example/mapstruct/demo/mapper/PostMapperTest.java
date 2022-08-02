@@ -1,7 +1,9 @@
 package com.example.mapstruct.demo.mapper;
 
-import com.example.mapstruct.demo.dto.PostCommentsResponseDto;
 import com.example.mapstruct.demo.domain.*;
+import com.example.mapstruct.demo.dto.PostCommentDownvoteResponseDto;
+import com.example.mapstruct.demo.dto.PostCommentResponseDto;
+import com.example.mapstruct.demo.dto.PostCommentsResponseDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -33,6 +36,17 @@ public class PostMapperTest {
         // then
         assertNotNull(postCommentsResponseDto);
         assertFalse(postCommentsResponseDto.getComments().isEmpty());
+        assertThat(postCommentsResponseDto.getComments()).hasSize(2);
+        assertThat(postCommentsResponseDto.getComments())
+                .extracting(PostCommentResponseDto::getComment)
+                .containsOnlyOnce("Test1", "Test2");
+        assertThat(postCommentsResponseDto.getComments())
+                .extracting(PostCommentResponseDto::getUsername)
+                .containsOnlyOnce("username1", "username2");
+        assertThat(postCommentsResponseDto.getComments())
+                .flatExtracting(PostCommentResponseDto::getPostCommentDownvotes)
+                .extracting(PostCommentDownvoteResponseDto::getId)
+                .containsOnlyOnce(1L, 2L, 3L, 4L);
     }
 
     public Post createNewPost() {
