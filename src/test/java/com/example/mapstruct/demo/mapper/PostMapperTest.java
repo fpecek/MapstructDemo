@@ -31,7 +31,7 @@ public class PostMapperTest {
         final Post post = createNewPost();
 
         // when
-        final PostCommentsResponseDto postCommentsResponseDto = mapper.postPostCommentsResponseDtoMapper(post);
+        final PostCommentsResponseDto postCommentsResponseDto = mapper.postToCommentsResponseDto(post);
 
         // then
         assertNotNull(postCommentsResponseDto);

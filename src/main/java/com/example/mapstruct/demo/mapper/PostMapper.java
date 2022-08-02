@@ -18,19 +18,19 @@ public interface PostMapper {
 
     @Mapping(source = "postComments", target = "comments")
     @Mapping(target = "count", expression="java(post.getPostComments().size())")
-    PostCommentsResponseDto postPostCommentsResponseDtoMapper(Post post);
+    PostCommentsResponseDto postToCommentsResponseDto(Post post);
 
     @Mapping(source = "user.username", target = "username")
-    PostCommentResponseDto postCommentPostCommentResponseDtoMapper(PostComment postComment);
+    PostCommentResponseDto postCommentToPostCommentResponseDto(PostComment postComment);
 
-    List<PostCommentResponseDto> postCommentPostCommentResponseDtoMapper(List<PostComment> postComment);
+    List<PostCommentResponseDto> postCommentToPostCommentResponseDto(List<PostComment> postComment);
 
-    PostCommentUpvoteResponseDto postCommentUpvotePostCommentUpvoteResponseDto(PostCommentUpvote postCommentUpvote);
+    PostCommentUpvoteResponseDto postCommentUpvoteToPostCommentUpvoteResponseDto(PostCommentUpvote postCommentUpvote);
 
-    List<PostCommentUpvoteResponseDto> postCommentUpvotePostCommentUpvoteResponseDto(List<PostCommentUpvote> postCommentUpvote);
+    List<PostCommentUpvoteResponseDto> postCommentUpvoteToPostCommentUpvoteResponseDto(List<PostCommentUpvote> postCommentUpvote);
 
-    PostCommentDownvoteResponseDto postCommentDownvotePostCommentUpvoteResponseDto(PostCommentDownvote postCommentUpvote);
+    PostCommentDownvoteResponseDto postCommentDownvoteToPostCommentUpvoteResponseDto(PostCommentDownvote postCommentUpvote);
 
-    List<PostCommentDownvoteResponseDto> postCommentDownvotePostCommentUpvoteResponseDto(List<PostCommentDownvote> postCommentUpvote);
+    List<PostCommentDownvoteResponseDto> postCommentDownvoteToPostCommentUpvoteResponseDto(List<PostCommentDownvote> postCommentUpvote);
 
 }
